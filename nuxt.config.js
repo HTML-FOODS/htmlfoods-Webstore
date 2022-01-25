@@ -1,5 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: false,
+  
   head: {
     title: 'STORE',
     htmlAttrs: {
@@ -23,8 +25,40 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/antd-ui'
+    { src: '~/plugins/antd-ui' },
+    // { src: "~/plugins/axios" },
+    // { src: "~/plugins/persistedState.client.js" }
   ],
+
+  axios: {
+    baseURL:
+      process.env.NODE_ENV === "production"
+        ? process.env.BASE_URL
+        : `https://htmlfood.herokuapp.com`
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/api/v1/admin/login",
+            method: "post"
+          },
+          logout: { url: "/api/v1/admin/logout", method: "put" },
+          user: false
+        }
+        // tokenType: ""
+      }
+    }
+  },
+
+  // Modules (https://go.nuxtjs.dev/config-modules)
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+
+  // router: {
+  //   middleware: ["auth"]
+  // },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
