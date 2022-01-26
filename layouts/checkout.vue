@@ -2,7 +2,7 @@
   <a-layout id="components-layout-demo-fixed-sider">
     <app-header />
     <a-layout>
-      <app-sidebar />
+      <app-checkout-steps />
       <a-layout
         :style="{
           marginLeft: '230px',
@@ -27,10 +27,10 @@
 
 <script>
 import AppBreadcrumb from "../components/Layout/AppBreadcrumb.vue";
+import AppCheckoutSteps from "../components/Layout/AppCheckoutSteps.vue";
 import AppHeader from "../components/Layout/AppHeader.vue";
-import AppSidebar from "../components/Layout/AppSidebar.vue";
 export default {
-  components: { AppSidebar, AppHeader, AppBreadcrumb },
+  components: { AppHeader, AppBreadcrumb, AppCheckoutSteps },
   data() {
     return {
       collapsed: false,
@@ -73,11 +73,6 @@ export default {
   margin: 0 auto;
 }
 
-.ant-tag {
-  display: flex;
-  align-items: center;
-}
-
 .ant-layout {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -97,5 +92,13 @@ export default {
   background-color: rgba(255, 249, 249, 0.993) !important;
   color: #c22429 !important;
   border-color: #c22429;
+}
+
+.ant-radio-inner::after {
+  background-color: #c42d32 !important;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  background-color: #c42d32 !important;
 }
 </style>

@@ -4,12 +4,12 @@
       <a-col :lg="{ span: 18 }" :xs="{ span: 24 }">
         <a-row type="flex" justify="space-between">
           <a-col v-for="day in days" :key="day.id">
-            <a-button
+            <a-tag
               class="button-coloured"
               :style="{ color: '#c22429', fontWeight: '500' }"
             >
               {{ day.name }}
-            </a-button>
+            </a-tag>
           </a-col>
         </a-row>
       </a-col>
@@ -131,12 +131,18 @@
           </a-row>
           <a-row class="meal_actions" type="flex" justify="space-between">
             <a-col :span="11">
-              <a-button block style="color: #c42d32; border-color: #c42d32">
+              <a-button
+                block
+                style="color: #c42d32; border-color: #c42d32"
+                @click="addToCart(modalProduct)"
+              >
                 ADD TO CART
               </a-button></a-col
             >
             <a-col :span="11">
-              <a-button block type="primary"> CHECKOUT </a-button></a-col
+              <nuxt-link to="/checkout">
+                <a-button block type="primary"> CHECKOUT </a-button></nuxt-link
+              ></a-col
             >
           </a-row>
         </a-col>
@@ -146,6 +152,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import LogoLicious from "~/assets/data/LogoLicious.png";
 import plus from "~/assets/icon/plus.svg";
 import minus from "~/assets/icon/minus.svg";
@@ -190,43 +197,43 @@ export default {
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
         {
           name: "Swallow & Soups",
           rating: "4.5",
-          price: "34,500",
-          preprice: "40,000",
+          price: 34500,
+          preprice: 40000,
           discount: "-4%",
         },
       ],
@@ -236,6 +243,28 @@ export default {
     setProductDetails(product) {
       this.modalProduct = product;
       this.modalVisible = true;
+    },
+    ...mapActions("cart", ["addProductToCart"]),
+    ...mapActions("cart", ["removeProductFromCart"]),
+    removeFromCart(product) {
+      this.removeProductFromCart(product);
+      this.$notification.success({
+        message: "Success",
+        description: "Product successfully removed from cart",
+      });
+    },
+    addToCart(product) {
+      this.addProductToCart({
+        product: product,
+        quantity: this.count,
+        product_name: product.name,
+        initial_cost: product.price,
+        preprice: product.preprice,
+      });
+      this.$notification.success({
+        message: "Success",
+        description: "Product successfully added to cart",
+      });
     },
   },
 };

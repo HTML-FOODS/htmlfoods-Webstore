@@ -3,7 +3,9 @@
     <div class="logo">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col :span="3">
-          <img :src="html_logo" />
+          <NuxtLink style="text-decoration: none" to="/">
+            <img :src="html_logo" />
+          </NuxtLink>
         </a-col>
 
         <a-col :span="3">
@@ -12,7 +14,7 @@
             class="button-coloured"
             :style="{ color: '#c22429', fontWeight: '500' }"
           >
-            Your location
+            <span style="margin-left: 15px"> Your location </span>
           </a-button>
         </a-col>
         <a-space />
@@ -26,48 +28,49 @@
         </a-col>
         <a-space />
         <a-col :span="2">
-          <a-button
-            icon="user"
-            class="button-coloured"
-            :style="{ color: '#c22429', fontWeight: '500' }"
-          >
-            Cart
-          </a-button>
+          <nuxt-link to="/checkout">
+            <a-button
+              icon="shopping-cart"
+              class="button-coloured"
+              :style="{ color: '#c22429', fontWeight: '500' }"
+            >
+              <span class="cart-number">
+                {{ cartItemCount }}
+              </span>
+              <span style="margin-left: 15px"> Cart </span>
+            </a-button>
+          </nuxt-link>
         </a-col>
 
         <a-col :span="2">
-          <a-button
-            icon="user"
-            class="button-coloured"
-            :style="{ color: '#c22429', fontWeight: '500' }"
+          <nuxt-link to="/login">
+            <a-button
+              icon="user"
+              class="button-coloured"
+              :style="{ color: '#c22429', fontWeight: '500' }"
+            >
+              <span style="margin-left: 15px"> Log in</span>
+            </a-button></nuxt-link
           >
-            Log in
-          </a-button>
         </a-col>
       </a-row>
     </div>
-    <!-- <a-menu
-      mode="horizontal"
-      :default-selected-keys="['2']"
-      :style="{ lineHeight: '64px' }"
-    >
-      <a-row type="flex" justify="space-between">
-        <a-col :span="6">
-          <img :src="html_logo" />
-        </a-col>
-      </a-row>
-    </a-menu> -->
   </a-layout-header>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import html_logo from "~/assets/data/html_logo.png";
 export default {
   data() {
     return {
       html_logo,
       search: null,
+      cart: 0,
     };
+  },
+  computed: {
+    ...mapGetters("cart", ["cartItemCount"]),
   },
 };
 </script>
@@ -79,6 +82,22 @@ export default {
   height: 38px;
   padding: 0 20px;
   margin: 0 auto;
+  position: relative;
+}
+
+.cart-number {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  background: #c42d32;
+  color: white;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
 /* .ant-input::placeholder {
