@@ -1,29 +1,18 @@
 <template>
-  <div
-    id="components-layout-demo-basic"
-    :style="{
-      minHeight: '100vh',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      backgroundSize: '100% 100%',
-    }"
-  >
-    <a-layout>
-      <a-layout-header>
-        <a-row type="flex" justify="space-between">
-          <a-col :span="6">
-            <img :src="html_logo" />
-          </a-col>
-        </a-row>
-      </a-layout-header>
+  <div id="components-layout-demo-basic" style="height: 100vh">
+    <a-layout style="height: 100%">
       <a-layout-content class="container">
-        <a-row type="flex" justify="space-between">
-          <a-col :span="24" class="login-side">
-            <a-row>
-              <h3 class="login-text">Log into HTML FOODS Admin</h3>
-            </a-row>
-            <a-form style="margin-top: 40px">
-              <a-row dense class="ma-0 pa-3">
+        <!-- <a-row> -->
+        <a-col :span="24" class="login-side">
+          <a-row type="flex" justify="center">
+            <h3 class="login-text">Login to your account</h3>
+          </a-row>
+          <a-row type="flex" justify="center">
+            <h5 class="login-caption">Enter a world of super-duper dishes!</h5>
+          </a-row>
+          <a-row type="flex" justify="center">
+            <a-form style="margin-top: 40px; width: 400px">
+              <a-row dense class="ma-0">
                 <a-input
                   size="large"
                   v-model="email"
@@ -43,6 +32,20 @@
                   :rules="[(v) => !!v || 'Please enter your password']"
                 >
                 </a-input-password>
+              </a-row>
+              <a-row type="flex" justify="end" class="admin">
+                <!-- <span style="margin: 0 auto"> -->
+                <a-button
+                  type="link"
+                  style="
+                    color: rgba(0, 0, 0, 0.65);
+                    margin-top: 10px;
+                    padding-right: 0px;
+                  "
+                >
+                  Forgot Password?
+                </a-button>
+                <!-- </span> -->
               </a-row>
               <a-row type="flex" justify="start">
                 <a-button
@@ -64,18 +67,22 @@
                   >
                 </a-button>
               </a-row>
-              <a-row type="flex" justify="start" class="admin">
-                <span style="margin: 0 auto">
-                  <a-button class="forgot-password" ghost>
-                    Forgot Password?
+              <a-row type="flex" justify="space-around" class="admin">
+                <span style="font-size: 13px">
+                  New User?
+                  <a-button
+                    type="link"
+                    style="color: #c42d32; padding: 5px 0px"
+                  >
+                    Sign Up
                   </a-button></span
                 >
               </a-row>
             </a-form>
-          </a-col></a-row
-        >
+          </a-row>
+        </a-col>
+        <!-- </a-row> -->
       </a-layout-content>
-      <a-layout-footer></a-layout-footer>
     </a-layout>
   </div>
 </template>
@@ -162,24 +169,14 @@ export default {
 .ant-layout {
   background: transparent;
 }
-.ant-layout-header {
-  background: transparent;
-  padding: 50px 10px 0 40px;
-  margin-bottom: 20px;
-  height: 11vh;
-}
 .container {
-  width: 75%;
-  margin: 20px auto 0 !important;
-  height: 70vh;
+  /* margin: 20px auto 0 !important;
+  position: relative; */
+  display: flex;
+  justify-content: center;
 }
-/* .ant-layout-content { */
-/* margin: calc(100) auto auto 180px; */
-/* height: vh; */
-/* } */
-.ant-layout-footer {
-  height: 15vh;
-  background: transparent;
+.login-side {
+  margin-top: 4rem;
 }
 .login-text {
   font-weight: 600;
@@ -210,7 +207,11 @@ export default {
   border-radius: 5px;
   max-width: 385px;
   height: 40px;
-  margin: 33px 0;
+  margin: 16px 0 33px;
+}
+.ant-btn:hover {
+  text-decoration: none;
+  background: rgba(194, 36, 41, 0.63137) !important;
 }
 .ant-input {
   background: #ffffff;

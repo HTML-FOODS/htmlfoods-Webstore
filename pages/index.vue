@@ -29,7 +29,10 @@
         v-for="product in products"
         :key="product.key"
       >
-        <a-card :bordered="false" class="card-major"
+        <a-card
+          :bordered="false"
+          class="card-major"
+          @click="setProductDetails(product)"
           ><a-row>
             <a-col :span="24">
               <div class="meal_card">
@@ -39,6 +42,7 @@
                   width="100%"
                   style="border-radius: 12px 12px 0px 0px"
                 />
+                <div class="discount">-4%</div>
               </div>
             </a-col>
 
@@ -70,18 +74,91 @@
     <a-row v-else>
       <a-col :lg="{ span: 24 }" :sm="{ span: 24 }" :xs="{ span: 24 }">
         <a-card :bordered="false" class="card-major">
-          <a-row type="flex" justify="center"> No Pending Order</a-row></a-card
+          <a-row type="flex" justify="center">
+            No Available Product</a-row
+          ></a-card
         >
       </a-col>
     </a-row>
+    <a-modal
+      v-model="modalVisible"
+      centered
+      width="500px"
+      @ok="() => (modalVisible = false)"
+      :footer="null"
+      class="card-modal"
+    >
+      <a-row>
+        <a-col :span="24">
+          <div class="modal-title">{{ modalProduct.name }}</div>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col :span="24">
+          <div class="meal_card">
+            <img
+              :src="LogoLicious"
+              alt="Meal Image"
+              width="100%"
+              style="border-radius: 12px 12px 0px 0px"
+            />
+            <div class="discount">-4%</div>
+          </div>
+        </a-col>
+
+        <a-col :span="24" style="">
+          <a-row type="flex" justify="space-between" style="margin: 13px 0">
+            <span class="ratings" style="font-size: 16px"
+              ><a-icon
+                type="star"
+                theme="filled"
+                :style="{ color: '#FFC107', marginRight: '2px' }"
+              />
+              {{ modalProduct.rating }}</span
+            >
+            <div style="display: flex; align-items: center">
+              <plus @click="count++" />
+              <span
+                style="font-weight: bold; font-size: 18px; margin: auto 10px"
+              >
+                {{ count }}
+              </span>
+              <minus @click="count--" />
+            </div>
+          </a-row>
+          <a-row class="meal_price" type="flex" justify="start">
+            <span class="price">&#8358;{{ modalProduct.price }}</span>
+          </a-row>
+          <a-row class="meal_actions" type="flex" justify="space-between">
+            <a-col :span="11">
+              <a-button block style="color: #c42d32; border-color: #c42d32">
+                ADD TO CART
+              </a-button></a-col
+            >
+            <a-col :span="11">
+              <a-button block type="primary"> CHECKOUT </a-button></a-col
+            >
+          </a-row>
+        </a-col>
+      </a-row>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import LogoLicious from "~/assets/data/LogoLicious.png";
+import plus from "~/assets/icon/plus.svg";
+import minus from "~/assets/icon/minus.svg";
 export default {
+  components: {
+    plus,
+    minus,
+  },
   data() {
     return {
+      modalProduct: {},
+      modalVisible: false,
+      count: 1,
       LogoLicious,
       days: [
         {
@@ -155,6 +232,12 @@ export default {
       ],
     };
   },
+  methods: {
+    setProductDetails(product) {
+      this.modalProduct = product;
+      this.modalVisible = true;
+    },
+  },
 };
 </script>
 
@@ -183,12 +266,14 @@ export default {
 .meal_title {
   font-weight: 500;
   font-size: 21px;
+  margin-top: 5px;
 }
 
 .price {
   background: rgba(196, 45, 50, 0.2);
   border-radius: 5px;
   color: #c42d32;
+  font-weight: bold;
   padding: 5px 10px;
   margin-right: 15px;
 }
@@ -200,7 +285,23 @@ export default {
 .ratings {
   font-weight: 600;
   font-size: 12px;
-  margin: 5px 0;
+  margin: 7px 0;
+}
+
+.card-modal {
+  /* border-radius: 12px 12px 0px 0px; */
+  /* margin-bottom: 25px;
+  margin-top: 25px;
+  margin-right: 7px;
+  margin-left: 7px;
+  max-width: 300px; */
+  position: relative;
+}
+
+.ant-btn-primary:hover {
+  background-color: #d1080e !important;
+  color: white !important;
+  border-color: #c22429;
 }
 
 .card-major {
@@ -213,10 +314,54 @@ export default {
   margin-right: 7px;
   margin-left: 7px;
   max-width: 300px;
+  position: relative;
+}
+
+.card-major:hover {
+  transition: all 1s ease-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+  border: 1px solid #cccccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.card-major:before {
+  transform: scale(2);
+  transform-origin: 50% 50%;
+  transition: transform 1s ease-out;
+}
+
+.card-major:hover:before {
+  transform: scale(2.15);
+}
+
+.card-major .discount,
+.card-modal .discount {
+  position: absolute;
+  left: 2.86%;
+  top: 3.68%;
+  background: #ffffff;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #c42d32;
+  padding: 3px 10px;
 }
 
 .card-major .ant-card-body {
   padding: 0;
   padding-bottom: 15px;
+}
+
+.modal-title {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.meal_actions {
+  margin-top: 20px;
 }
 </style>

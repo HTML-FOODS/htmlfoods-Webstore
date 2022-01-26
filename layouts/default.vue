@@ -71,4 +71,21 @@ export default {
 .ant-layout {
   background: rgba(255, 255, 255, 0.8);
 }
+
+.ant-btn-primary {
+  background-color: #c22429 !important;
+  border-color: #c22429;
+}
+
+.ant-btn-primary:hover {
+  background-color: #f8555a !important;
+  color: white !important;
+  border-color: #c22429;
+}
+
+.ant-btn:hover {
+  background-color: rgba(255, 249, 249, 0.993) !important;
+  color: #c22429 !important;
+  border-color: #c22429;
+}
 </style>

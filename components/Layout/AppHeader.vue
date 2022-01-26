@@ -15,7 +15,7 @@
             Your location
           </a-button>
         </a-col>
-        <a-spacer />
+        <a-space />
         <a-col :span="10">
           <a-input
             v-model="search"
@@ -24,7 +24,7 @@
             <a-icon slot="prefix" type="search" />
           </a-input>
         </a-col>
-        <a-spacer />
+        <a-space />
         <a-col :span="2">
           <a-button
             icon="user"
@@ -66,6 +66,7 @@ export default {
   data() {
     return {
       html_logo,
+      search: null,
     };
   },
 };
