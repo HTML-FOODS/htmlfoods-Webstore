@@ -1,5 +1,6 @@
 export const state = () => ({
     storeCart: [],
+    isLoggedIn: false
 });
 export const getters = {
     cartItemCount(state) {
@@ -41,6 +42,9 @@ export const mutations = {
     SET_CART(state, cartItems) {
         state.storeCart = cartItems;
     },
+    SET_LOG(state, isLoggedIn) {
+        state.isLoggedIn = isLoggedIn;
+    },
     REMOVE_PRODUCT_FROM_CART(state, product) {
         state.storeCart = state.storeCart.filter((item) => {
             return item.product._id !== product._id;
@@ -74,6 +78,9 @@ export const mutations = {
 };
 
 export const actions = {
+    toggleLogIn: ({ commit }, truthy) => {
+        commit("SET_LOG", truthy)
+    },
     addProductToCart: (
         { commit },
         { product, quantity, name, price, preprice }

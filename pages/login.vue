@@ -54,7 +54,7 @@
                   large
                   block
                   class="login-btn"
-                  @click="processLogin()"
+                  @click="login()"
                 >
                   <span
                     :style="{
@@ -88,6 +88,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import html_logo from "~/assets/data/html_logo.png";
 export default {
   layout: "auth",
@@ -102,58 +103,16 @@ export default {
     };
   },
   methods: {
-    async processLogin() {
-      const thisLogin = {
-        email: this.email,
-        password: this.password,
-      };
-      this.loading = true;
-      await this.$auth
-        .loginWith("local", { data: thisLogin })
-        .then((res) => {
-          const { data } = res;
-          this.loading = false;
-          if (data.status == "OK") {
-            this.$store.commit("admin/setAdmin", data.payload);
-            this.$notification.success({
-              message: "Success",
-              description: data.message,
-            });
-            // this.$router.history;
-            // ? this.$router.replace(
-            //     this.$router.history.current.query.redirect
-            //   )
-            // :
-            this.$router.push(`/`);
-
-            // this.$router.replace(this.$router.history.current.query.redirect);
-          } else if (data.status == "ERROR") {
-            this.authFailed = true;
-            // this.$store.commit("admin/setAdmin", null, false);
-            this.$notification.error({
-              message: "Error",
-              description: data.message,
-            });
-            return;
-          }
-        })
-        .catch((err) => {
-          this.loading = false;
-          const { response, message } = err;
-          if (response.data.message == "Authorization Denied/Invalid Token") {
-            this.$notification.error({
-              message: "Error",
-              description: "You need to log in first",
-            });
-            this.$router.push(`/login`);
-          } else
-            this.$notification.error({
-              message: "Error",
-              description: response.data.message || "Network Error",
-            });
-
-          // this.$store.commit("admin/setAdmin", null, false);
+    ...mapActions("cart", ["toggleLogIn"]),
+    login() {
+      this.toggleLogIn(true);
+      setTimeout(() => {
+        this.$notification.success({
+          message: "Success",
+          description: "You're now logged in",
         });
+        this.$router.push("/");
+      }, 1000);
     },
   },
 };
