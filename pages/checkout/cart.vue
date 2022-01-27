@@ -42,7 +42,11 @@
           </a-row>
         </a-card>
       </a-row>
-      <a-row type="flex" justify="end" style="margin-top: 25px">
+      <a-row
+        type="flex"
+        justify="end"
+        style="margin-top: 25px; margin-right: 40px"
+      >
         <a-col>
           <a-row type="flex" justify="start" class="total_label">Total</a-row>
           <a-row type="flex" justify="start" class="total"
@@ -74,12 +78,15 @@ export default {
   },
   computed: {
     cartItems() {
-      return this.$store.state.cart.cart;
+      return this.$store.state.cart.storeCart;
     },
     ...mapGetters("cart", ["cartTotalPrice"]),
   },
   methods: {
     numberWithCommas(x) {
+      if (!x) {
+        return;
+      }
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     ...mapActions("cart", ["updateCart"]),

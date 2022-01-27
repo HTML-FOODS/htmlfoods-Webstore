@@ -42,7 +42,7 @@
                   width="100%"
                   style="border-radius: 12px 12px 0px 0px"
                 />
-                <div class="discount">-4%</div>
+                <div class="discount">{{ product.discount }}</div>
               </div>
             </a-col>
 
@@ -104,7 +104,7 @@
               width="100%"
               style="border-radius: 12px 12px 0px 0px"
             />
-            <div class="discount">-4%</div>
+            <div class="discount">{{ modalProduct.discount }}</div>
           </div>
         </a-col>
 
@@ -129,7 +129,9 @@
             </div>
           </a-row>
           <a-row class="meal_price" type="flex" justify="start">
-            <span class="price">&#8358;{{ modalProduct.price }}</span>
+            <span class="price"
+              >&#8358;{{ numberWithCommas(modalProduct.price) }}</span
+            >
           </a-row>
           <a-row class="meal_actions" type="flex" justify="space-between">
             <a-col :span="11">
@@ -230,7 +232,7 @@ export default {
         },
         {
           _id: 5,
-          name: "Boiled Plantain + Veg sauce + Fish",
+          name: "Boiled Plantain + Veg sauce",
           rating: "4.9",
           price: 1250,
           preprice: 1500,
@@ -249,6 +251,9 @@ export default {
   },
   methods: {
     numberWithCommas(x) {
+      if (!x) {
+        return;
+      }
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     setProductDetails(product) {
@@ -305,7 +310,7 @@ export default {
 
 .meal__title {
   font-weight: 500;
-  font-size: 21px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
@@ -353,12 +358,12 @@ export default {
   margin-top: 25px;
   margin-right: 7px;
   margin-left: 7px;
-  max-width: 300px;
+  max-width: 390px;
   position: relative;
 }
 
 .card-major:hover {
-  transition: all 1s ease-out;
+  transition: all 1s ease-in-out;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
   top: -4px;
   border: 1px solid #cccccc;
@@ -369,7 +374,7 @@ export default {
 .card-major:before {
   transform: scale(2);
   transform-origin: 50% 50%;
-  transition: transform 1s ease-out;
+  transition: transform 1s ease-in-out;
 }
 
 .card-major:hover:before {

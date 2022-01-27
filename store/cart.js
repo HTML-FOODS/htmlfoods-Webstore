@@ -1,15 +1,15 @@
 export const state = () => ({
-    cart: [],
+    storeCart: [],
 });
 export const getters = {
     cartItemCount(state) {
-        return state.cart.length;
+        return state.storeCart.length;
     },
 
     cartTotalPrice(state) {
         let total = 0;
 
-        state.cart.forEach((item) => {
+        state.storeCart.forEach((item) => {
             total += item.product.price * item.quantity;
         });
 
@@ -21,7 +21,7 @@ export const mutations = {
         state,
         { product, quantity, name, price, preprice }
     ) {
-        let productInCart = state.cart.find((item) => {
+        let productInCart = state.storeCart.find((item) => {
             return item.product._id === product._id;
         });
 
@@ -30,7 +30,7 @@ export const mutations = {
             return;
         }
 
-        state.cart.push({
+        state.storeCart.push({
             product,
             quantity,
             name,
@@ -39,22 +39,22 @@ export const mutations = {
         });
     },
     SET_CART(state, cartItems) {
-        state.cart = cartItems;
+        state.storeCart = cartItems;
     },
     REMOVE_PRODUCT_FROM_CART(state, product) {
-        state.cart = state.cart.filter((item) => {
+        state.storeCart = state.storeCart.filter((item) => {
             return item.product._id !== product._id;
         });
     },
     UPDATE_CART(state, { product, quantity }) {
-        // let Product = state.cart.findIndex((item) => {
+        // let Product = state.storeCart.findIndex((item) => {
         //     item.product._id === product._id;
         // });
         // console.log("index:::::", Product + 1);
 
-        // state.cart[Product + 1].quantity = quantity
+        // state.storeCart[Product + 1].quantity = quantity
 
-        let productInCart = state.cart.find((item) => {
+        let productInCart = state.storeCart.find((item) => {
             // console.log(item.product._id, product);
             return item.product._id === product._id;
         });
@@ -69,7 +69,7 @@ export const mutations = {
     },
 
     CLEAR_CART_ITEMS(state) {
-        state.cart = [];
+        state.storeCart = [];
     },
 };
 

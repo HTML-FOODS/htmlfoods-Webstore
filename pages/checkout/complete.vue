@@ -6,7 +6,7 @@
     <a-row style="margin: auto 35px">
       <a-card style="width: 500px; padding: 10px 30px; margin: auto">
         <a-row type="flex" justify="center">
-          <success />
+          <img :src="success" />
         </a-row>
         <a-row type="flex" justify="center" style="font-weight: 500">
           Your order for<span style="color: #c42d32; font-weight: bold">
@@ -32,11 +32,13 @@
 </template>
 
 <script>
-import success from "~/assets/icon/success.svg";
+import success from "~/assets/data/success.png";
 export default {
   layout: "checkout",
-  components: {
-    success,
+  data() {
+    return {
+      success,
+    };
   },
 };
 </script>
