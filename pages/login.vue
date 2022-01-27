@@ -213,19 +213,19 @@ export default {
   text-decoration: none;
   background: rgba(194, 36, 41, 0.63137) !important;
 }
-.ant-input {
-  background: #ffffff;
-  border: 1px solid #dcd8d8;
-  box-sizing: border-box;
-  border-radius: 5px;
+.login__Input.ant-input {
+  background: #ffffff !important;
+  border: 1px solid #dcd8d8 !important;
+  box-sizing: border-box !important;
+  border-radius: 5px !important;
   max-width: 385px;
   margin-bottom: 30px;
-  /* height: 60px !important; */
 }
+
 /* input.ant-input {
   height: 60px !important;
 } */
-span.ant-input-affix-wrapper.ant-input-password {
+.login__Input.ant-input-password-large {
   background: #ffffff;
   border: 1px solid #dcd8d8;
   box-sizing: border-box;

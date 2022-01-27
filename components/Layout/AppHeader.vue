@@ -20,6 +20,7 @@
         <a-space />
         <a-col :span="10">
           <a-input
+            class="coloured"
             v-model="search"
             placeholder="Search for your favourite meals"
           >
@@ -28,7 +29,7 @@
         </a-col>
         <a-space />
         <a-col :span="2">
-          <nuxt-link to="/checkout">
+          <nuxt-link to="/checkout/cart">
             <a-button
               icon="shopping-cart"
               class="button-coloured"
@@ -75,7 +76,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.button-coloured.ant-btn:focus {
+  border: none;
+  background: rgba(196, 45, 50, 0.1) !important;
+  color: #c42d32 !important;
+  width: 117px;
+}
+
 .button-coloured {
   background: rgba(196, 45, 50, 0.1);
   border-radius: 5px;
@@ -84,15 +92,21 @@ export default {
   margin: 0 auto;
   position: relative;
 }
-
+.coloured .ant-input {
+  background: rgba(196, 45, 50, 0.1) !important;
+  border-radius: 5px;
+  border: none;
+  height: 38px;
+}
 .cart-number {
   position: absolute;
   top: 4px;
-  left: 20px;
+  left: 30px;
   background: #c42d32;
   color: white;
   height: 15px;
   width: 15px;
+  font-size: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

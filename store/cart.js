@@ -19,7 +19,7 @@ export const getters = {
 export const mutations = {
     ADD_TO_CART(
         state,
-        { product, quantity, product_name, initial_cost, preprice }
+        { product, quantity, name, price, preprice }
     ) {
         let productInCart = state.cart.find((item) => {
             return item.product._id === product._id;
@@ -33,8 +33,8 @@ export const mutations = {
         state.cart.push({
             product,
             quantity,
-            product_name,
-            initial_cost,
+            name,
+            price,
             preprice,
         });
     },
@@ -55,10 +55,14 @@ export const mutations = {
         // state.cart[Product + 1].quantity = quantity
 
         let productInCart = state.cart.find((item) => {
+            // console.log(item.product._id, product);
             return item.product._id === product._id;
         });
 
+        console.log(productInCart);
+
         if (productInCart) {
+            console.log(productInCart.quantity, quantity);
             productInCart.quantity = quantity;
             return;
         }
@@ -72,13 +76,13 @@ export const mutations = {
 export const actions = {
     addProductToCart: (
         { commit },
-        { product, quantity, product_name, initial_cost, preprice }
+        { product, quantity, name, price, preprice }
     ) => {
         commit("ADD_TO_CART", {
             product,
             quantity,
-            product_name,
-            initial_cost,
+            name,
+            price,
             preprice,
         });
     },
@@ -93,9 +97,9 @@ export const actions = {
     },
     // checkOut: ({ commit }, { $axios, $router }) => {
     //   return $axios.put(`/v1/product/cart/${this.$route.params.id}`, {
-    //     product_name: this.singleProduct.name,
+    //     name: this.singleProduct.name,
     //     number: this.quantity,
-    //     initial_cost: this.singleProduct.cost,
+    //     price: this.singleProduct.cost,
     //     preprice: this.singleProduct.cover,
     //   });
     // },

@@ -35,14 +35,14 @@ export default {};
   font-weight: 700;
   font-size: 20px;
   color: #c4c4c4;
-  margin: 5px 0;
+  margin: 12px 0;
   padding: 0 15px;
 }
 
 .category {
   font-weight: 700;
   font-size: 20px;
-  margin: 5px 0;
+  margin: 12px 0;
   padding: 0 15px;
 }
 

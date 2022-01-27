@@ -47,7 +47,7 @@
             </a-col>
 
             <a-col :span="24" style="margin-left: 15px">
-              <a-row class="meal_title" type="flex" justify="start">
+              <a-row class="meal__title" type="flex" justify="start">
                 {{ product.name }}
               </a-row>
               <a-row type="flex" justify="start">
@@ -60,10 +60,12 @@
                   {{ product.rating }}</span
                 >
               </a-row>
-              <a-row class="meal_price" type="flex" justify="start">
-                <span class="price">&#8358;{{ product.price }}</span>
+              <a-row class="" type="flex" justify="start">
+                <span class="price"
+                  >&#8358;{{ numberWithCommas(product.price) }}</span
+                >
                 <span class="preprice">
-                  <s>{{ product.preprice }}</s>
+                  <s>{{ numberWithCommas(product.preprice) }}</s>
                 </span>
               </a-row>
             </a-col>
@@ -117,13 +119,13 @@
               {{ modalProduct.rating }}</span
             >
             <div style="display: flex; align-items: center">
-              <plus @click="count++" />
+              <plus @click="count++" style="cursor: pointer" />
               <span
                 style="font-weight: bold; font-size: 18px; margin: auto 10px"
               >
                 {{ count }}
               </span>
-              <minus @click="count--" />
+              <minus @click="count--" style="cursor: pointer" />
             </div>
           </a-row>
           <a-row class="meal_price" type="flex" justify="start">
@@ -140,7 +142,7 @@
               </a-button></a-col
             >
             <a-col :span="11">
-              <nuxt-link to="/checkout">
+              <nuxt-link to="/checkout/cart">
                 <a-button block type="primary"> CHECKOUT </a-button></nuxt-link
               ></a-col
             >
@@ -195,6 +197,7 @@ export default {
       ],
       products: [
         {
+          _id: 1,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 34500,
@@ -202,6 +205,15 @@ export default {
           discount: "-4%",
         },
         {
+          _id: 2,
+          name: "Eba",
+          rating: "4.5",
+          price: 34500,
+          preprice: 40000,
+          discount: "-4%",
+        },
+        {
+          _id: 3,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 34500,
@@ -209,6 +221,7 @@ export default {
           discount: "-4%",
         },
         {
+          _id: 4,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 34500,
@@ -216,6 +229,7 @@ export default {
           discount: "-4%",
         },
         {
+          _id: 5,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 34500,
@@ -223,13 +237,7 @@ export default {
           discount: "-4%",
         },
         {
-          name: "Swallow & Soups",
-          rating: "4.5",
-          price: 34500,
-          preprice: 40000,
-          discount: "-4%",
-        },
-        {
+          _id: 6,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 34500,
@@ -240,6 +248,9 @@ export default {
     };
   },
   methods: {
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     setProductDetails(product) {
       this.modalProduct = product;
       this.modalVisible = true;
@@ -257,8 +268,8 @@ export default {
       this.addProductToCart({
         product: product,
         quantity: this.count,
-        product_name: product.name,
-        initial_cost: product.price,
+        name: product.name,
+        price: product.price,
         preprice: product.preprice,
       });
       this.$notification.success({
@@ -292,7 +303,7 @@ export default {
   }
 }
 
-.meal_title {
+.meal__title {
   font-weight: 500;
   font-size: 21px;
   margin-top: 5px;

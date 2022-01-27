@@ -13,13 +13,50 @@
     >
       <a-card class="steps">
         <a-timeline class="timeline">
-          <a-timeline-item><one slot="dot" />Cart</a-timeline-item>
-          <a-timeline-item><two slot="dot" />Delivery Details</a-timeline-item>
+          <a-timeline-item
+            ><aone slot="dot" v-if="route === '/checkout/cart'" /><one
+              slot="dot"
+              v-else
+            />
+            <span
+              :style="route === '/checkout/cart' ? 'font-weight: bold' : ''"
+            >
+              Cart</span
+            ></a-timeline-item
+          >
           <a-timeline-item>
-            <three slot="dot" />
-            Payment
+            <atwo slot="dot" v-if="route === '/checkout/delivery'" /><two
+              slot="dot"
+              v-else
+            />
+            <span
+              :style="route === '/checkout/delivery' ? 'font-weight: bold' : ''"
+            >
+              Delivery Details</span
+            ></a-timeline-item
+          >
+          <a-timeline-item>
+            <athree slot="dot" v-if="route === '/checkout/payment'" /><three
+              slot="dot"
+              v-else
+            />
+            <span
+              :style="route === '/checkout/payment' ? 'font-weight: bold' : ''"
+            >
+              Payment</span
+            >
           </a-timeline-item>
-          <a-timeline-item><four slot="dot" />Order Complete</a-timeline-item>
+          <a-timeline-item>
+            <afour slot="dot" v-if="route === '/checkout/complete'" /><four
+              slot="dot"
+              v-else
+            />
+            <span
+              :style="route === '/checkout/complete' ? 'font-weight: bold' : ''"
+            >
+              Order Complete
+            </span></a-timeline-item
+          >
         </a-timeline>
       </a-card>
     </a-layout-sider>
@@ -31,12 +68,25 @@ import one from "~/assets/icon/one.svg";
 import two from "~/assets/icon/two.svg";
 import three from "~/assets/icon/three.svg";
 import four from "~/assets/icon/four.svg";
+import aone from "~/assets/icon/aone.svg";
+import atwo from "~/assets/icon/atwo.svg";
+import athree from "~/assets/icon/athree.svg";
+import afour from "~/assets/icon/afour.svg";
 export default {
   components: {
     one,
     two,
     three,
     four,
+    aone,
+    atwo,
+    athree,
+    afour,
+  },
+  computed: {
+    route() {
+      return this.$route.path;
+    },
   },
 };
 </script>
@@ -51,7 +101,7 @@ export default {
 }
 .ant-timeline-item-content {
   margin: 0 0 0 40px !important;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
 }
 .steps {

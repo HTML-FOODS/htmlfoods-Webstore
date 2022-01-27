@@ -2,10 +2,8 @@
   <a-layout id="components-layout-demo-fixed-sider">
     <app-header />
     <a-layout>
-      <app-sidebar />
       <a-layout
         :style="{
-          marginLeft: '230px',
           height: 'calc(100vh - 96px)',
           background: 'rgba(242, 242, 242, 0.8)',
         }"
@@ -28,9 +26,8 @@
 <script>
 import AppBreadcrumb from "../components/Layout/AppBreadcrumb.vue";
 import AppHeader from "../components/Layout/AppHeader.vue";
-import AppSidebar from "../components/Layout/AppSidebar.vue";
 export default {
-  components: { AppSidebar, AppHeader, AppBreadcrumb },
+  components: { AppHeader, AppBreadcrumb },
   data() {
     return {
       collapsed: false,

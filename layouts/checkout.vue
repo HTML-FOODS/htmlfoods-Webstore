@@ -55,12 +55,7 @@ export default {
 .ant-input-affix-wrapper .ant-input-prefix {
   color: #c22429 !important;
 }
-.ant-input {
-  background: rgba(196, 45, 50, 0.1) !important;
-  border-radius: 5px !important;
-  border: none !important;
-  height: 38px;
-}
+
 .ant-layout-header {
   height: 96px !important;
 }

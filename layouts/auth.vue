@@ -68,4 +68,11 @@ body {
 .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
   max-width: 385px;
 }
+
+.ant-input {
+  background: white;
+  border-radius: 5px !important;
+  /* border: none !important; */
+  height: 38px;
+}
 </style>
