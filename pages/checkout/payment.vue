@@ -23,7 +23,7 @@
                     </a-row>
                     <a-row type="flex" justify="start" class="payment-label"
                       >Account Name :
-                      <span class="acct_no">HTML FOODS company</span>
+                      <span class="acct_no">MICMAKIN</span>
                     </a-row>
                     <a-row type="flex" justify="start" class="payment-label"
                       >Bank Name :

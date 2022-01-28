@@ -15,7 +15,7 @@
       </a-col>
     </a-row>
 
-    <a-row type="flex">
+    <a-row type="flex" style="margin-bottom: 1rem">
       <a-col :lg="{ span: 24 }" :xs="{ span: 24 }">
         <div class="title-head">Today’s menu</div>
       </a-col>
@@ -26,8 +26,8 @@
         :lg="{ span: 8 }"
         :sm="{ span: 22 }"
         :xs="{ span: 24 }"
-        v-for="product in products"
-        :key="product.key"
+        v-for="(product, index) in products"
+        :key="index"
       >
         <a-card
           :bordered="false"
@@ -37,7 +37,7 @@
             <a-col :span="24">
               <div class="meal_card">
                 <img
-                  :src="LogoLicious"
+                  :src="product.image"
                   alt="Meal Image"
                   width="100%"
                   style="border-radius: 12px 12px 0px 0px"
@@ -158,6 +158,12 @@
 <script>
 import { mapActions } from "vuex";
 import LogoLicious from "~/assets/data/LogoLicious.png";
+import meal1 from "~/assets/data/meal-1.jpg";
+import meal2 from "~/assets/data/meal-2.jpg";
+import meal3 from "~/assets/data/meal-3.jpg";
+import meal4 from "~/assets/data/meal-4.jpg";
+import meal5 from "~/assets/data/meal-5.jpg";
+import meal0 from "~/assets/data/meal-6.jpg";
 import plus from "~/assets/icon/plus.svg";
 import minus from "~/assets/icon/minus.svg";
 export default {
@@ -167,6 +173,12 @@ export default {
   },
   data() {
     return {
+      meal1,
+      meal2,
+      meal3,
+      meal4,
+      meal5,
+      meal0,
       modalProduct: {},
       modalVisible: false,
       count: 1,
@@ -200,6 +212,7 @@ export default {
       products: [
         {
           _id: 1,
+          image: meal0,
           name: "Swallow & Soups",
           rating: "4.5",
           price: 1500,
@@ -208,6 +221,7 @@ export default {
         },
         {
           _id: 2,
+          image: meal1,
           name: "White Rice and Chicken",
           rating: "4.5",
           price: 1500,
@@ -216,6 +230,7 @@ export default {
         },
         {
           _id: 3,
+          image: meal2,
           name: "Rich Smoothie",
           rating: "4.5",
           price: 1200,
@@ -224,6 +239,7 @@ export default {
         },
         {
           _id: 4,
+          image: meal3,
           name: "Ginger Drink",
           rating: "4.7",
           price: 700,
@@ -232,6 +248,7 @@ export default {
         },
         {
           _id: 5,
+          image: meal4,
           name: "Boiled Plantain + Veg sauce",
           rating: "4.9",
           price: 1250,
@@ -240,6 +257,7 @@ export default {
         },
         {
           _id: 6,
+          image: meal5,
           name: "Waffles & 2 Grilled Chicken",
           rating: "4.5",
           price: 1700,
