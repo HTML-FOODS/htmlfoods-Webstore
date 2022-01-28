@@ -4,7 +4,9 @@
       <a-row type="flex" justify="space-around" align="middle">
         <a-col :span="3">
           <NuxtLink style="text-decoration: none" to="/">
-            <img :src="html_logo" />
+            <a-row type="flex" justify="center">
+              <img :src="chicken_logo" height="70px" />
+            </a-row>
           </NuxtLink>
         </a-col>
 
@@ -61,11 +63,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import html_logo from "~/assets/data/html_logo.png";
+import chicken_logo from "~/assets/data/ChickenRepublic_Logo.png";
 export default {
   data() {
     return {
-      html_logo,
+      chicken_logo,
       search: null,
       cart: 0,
     };
