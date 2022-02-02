@@ -105,8 +105,10 @@ export default {
   methods: {
     ...mapActions("cart", ["toggleLogIn"]),
     login() {
+      this.loading = true;
       this.toggleLogIn(true);
       setTimeout(() => {
+        this.loading = false;
         this.$notification.success({
           message: "Success",
           description: "You're now logged in",

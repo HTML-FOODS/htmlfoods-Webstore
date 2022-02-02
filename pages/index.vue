@@ -46,7 +46,7 @@
               </div>
             </a-col>
 
-            <a-col :span="24" style="margin-left: 15px">
+            <a-col :span="24" style="margin: auto 15px">
               <a-row class="meal__title" type="flex" justify="start">
                 {{ product.name }}
               </a-row>
@@ -99,7 +99,7 @@
         <a-col :span="24">
           <div class="meal_card">
             <img
-              :src="LogoLicious"
+              :src="modalProduct.image"
               alt="Meal Image"
               width="100%"
               style="border-radius: 12px 12px 0px 0px"
@@ -213,7 +213,7 @@ export default {
         {
           _id: 1,
           image: meal0,
-          name: "Swallow & Soups",
+          name: "CITIZENS MEAL",
           rating: "4.5",
           price: 1500,
           preprice: 2000,
@@ -222,7 +222,7 @@ export default {
         {
           _id: 2,
           image: meal1,
-          name: "White Rice and Chicken",
+          name: "1/4 ROTISSERIE MEAL",
           rating: "4.5",
           price: 1500,
           preprice: 2300,
@@ -231,7 +231,7 @@ export default {
         {
           _id: 3,
           image: meal2,
-          name: "Rich Smoothie",
+          name: "BIGBOYZ MEAL",
           rating: "4.5",
           price: 1200,
           preprice: 1900,
@@ -240,7 +240,7 @@ export default {
         {
           _id: 4,
           image: meal3,
-          name: "Ginger Drink",
+          name: "REFUEL MAX",
           rating: "4.7",
           price: 700,
           preprice: 1000,
@@ -249,7 +249,7 @@ export default {
         {
           _id: 5,
           image: meal4,
-          name: "Boiled Plantain + Veg sauce",
+          name: "REFUEL MEAL",
           rating: "4.9",
           price: 1250,
           preprice: 1500,
@@ -258,7 +258,7 @@ export default {
         {
           _id: 6,
           image: meal5,
-          name: "Waffles & 2 Grilled Chicken",
+          name: "REFUEL MEAL (SPAGHETTI)",
           rating: "4.5",
           price: 1700,
           preprice: 2000,
@@ -380,14 +380,14 @@ export default {
   position: relative;
 }
 
-.card-major:hover {
+/* .card-major:hover {
   transition: all 1s ease-in-out;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
   top: -4px;
   border: 1px solid #cccccc;
   background-color: white;
   cursor: pointer;
-}
+} */
 
 .card-major:before {
   transform: scale(2);
