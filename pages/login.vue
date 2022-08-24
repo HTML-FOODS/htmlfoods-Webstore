@@ -90,6 +90,7 @@
 <script>
 import { mapActions } from "vuex";
 import html_logo from "~/assets/data/html_logo.png";
+import axios from 'axios'
 export default {
   layout: "auth",
   auth: false,
@@ -107,15 +108,41 @@ export default {
     login() {
       this.loading = true;
       this.toggleLogIn(true);
-      setTimeout(() => {
+
+      axios.post('https://htmlfood.herokuapp.com/api/v1/user/login',{email:this.email, password:this.password})
+      .then(res =>{
+        console.log({res});
         this.loading = false;
+
+       
+         //save to local storage or use vue x(store)
+         localStorage.setItem("userData", JSON.stringify(res.data.payload)) 
+          //console.log(JSON.parse(localStorage.getItem("userData")));
         this.$notification.success({
           message: "Success",
           description: "You're now logged in",
         });
         this.$router.push("/");
-      }, 1000);
+      })
+      .catch(err =>{
+        this.loading = false;
+        this.$notification.error({
+          message: "Error",
+          description: err?.response?.data?.message,
+        });
+        console.log({err});
+      })
+
+      // setTimeout(() => {
+      //   this.loading = false;
+      //   this.$notification.success({
+      //     message: "Success",
+      //     description: "You're now logged in",
+      //   });
+      //   this.$router.push("/");
+      // }, 1000);
     },
+    
   },
 };
 </script>
@@ -229,3 +256,4 @@ input:-internal-autofill-selected {
   }
 }
 </style>
+
