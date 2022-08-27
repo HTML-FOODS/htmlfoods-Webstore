@@ -7,11 +7,11 @@
       height: '100vh',
       position: 'fixed',
       left: 0,
-      paddingTop: '5rem',
+      padding: '1.5rem',
     }"
   >
     <a-row class="restaurant">
-      Restuarants <span class="coming"> Coming Soon </span>
+      Store 
     </a-row>
     <a-row class="category"> Categories </a-row>
     <a-row class="category"> Price range </a-row>
@@ -44,11 +44,5 @@ export default {};
   font-size: 20px;
   margin: 12px 0;
   padding: 0 15px;
-}
-
-.coming {
-  color: #c22429;
-  font-weight: 600;
-  font-size: 10px;
 }
 </style>

@@ -2,6 +2,7 @@ export const state = () => ({
     storeCart: [],
     isLoggedIn: false
 });
+
 export const getters = {
     cartItemCount(state) {
         return state.storeCart.length;

@@ -2,7 +2,7 @@
     <div>
          <a-row type="flex" justify="space-between" v-if="products.length >= 1">
       <a-col
-        :lg="{ span: 8 }"
+        :lg="{ span: 6 }"
         :sm="{ span: 22 }"
         :xs="{ span: 24 }"
         v-for="(product, index) in products"
@@ -227,10 +227,14 @@ export default {
       }
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
+
+
     setProductDetails(product) {
       this.modalProduct = product;
       this.modalVisible = true;
     },
+
+
     ...mapActions("cart", ["addProductToCart"]),
     ...mapActions("cart", ["removeProductFromCart"]),
     removeFromCart(product) {
@@ -240,6 +244,7 @@ export default {
         description: "Product successfully removed from cart",
       });
     },
+
     addToCart(product) {
       this.addProductToCart({
         product: product,
@@ -253,13 +258,14 @@ export default {
         description: "Product successfully added to cart",
       });
     },
+    
   },
 };
 </script>
 <style>
 .meal__title {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 5px;
 }
 .price {
@@ -286,6 +292,7 @@ export default {
   margin-left: 7px;
   max-width: 300px; */
   position: relative;
+  width:300px;
 }
 .ant-btn-primary:hover {
   background-color: #d1080e !important;
@@ -295,23 +302,13 @@ export default {
 .card-major {
   bottom: 5.35%;
   background: #ffffff;
-  /* box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.12); */
   border-radius: 12px 12px 0px 0px;
   margin-bottom: 25px;
   margin-top: 25px;
-  margin-right: 7px;
-  margin-left: 7px;
-  max-width: 390px;
-  position: relative;
+  margin-right: 10px;
+  margin-left: 10px;
+  max-width: 300px ;
 }
-/* .card-major:hover {
-  transition: all 1s ease-in-out;
-  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-  top: -4px;
-  border: 1px solid #cccccc;
-  background-color: white;
-  cursor: pointer;
-} */
 .card-major:before {
   transform: scale(2);
   transform-origin: 50% 50%;
@@ -320,18 +317,29 @@ export default {
 .card-major:hover:before {
   transform: scale(2.15);
 }
-.card-major .discount,
-.card-modal .discount {
+.card-major .discount{
   position: absolute;
-  left: 2.86%;
-  top: 3.68%;
-  background: #ffffff;
+  left: 75%;
+  top:102%;
+  background: #000;
   border-radius: 5px;
   font-weight: 600;
   font-size: 13px;
-  color: #c42d32;
+  color: #fff;
   padding: 3px 10px;
 }
+.card-modal .discount {
+  position: absolute;
+  left: 65%;
+  top:105%;
+  background: #000;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  padding: 3px 10px;
+}
+
 .card-major .ant-card-body {
   padding: 0;
   padding-bottom: 15px;

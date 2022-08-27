@@ -27,7 +27,8 @@ export default {
   plugins: [
     { src: '~/plugins/antd-ui' },
     // { src: "~/plugins/axios" },
-    { src: "~/plugins/persistedState.client.js" }
+    { src: "~/plugins/persistedState.client.js" },
+    { src: "~/plugins/map.js"}
   ],
 
   axios: {

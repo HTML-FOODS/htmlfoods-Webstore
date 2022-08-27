@@ -11,13 +11,15 @@
         </a-col>
 
         <a-col :span="3">
-          <a-button
-            icon="environment"
-            class="button-coloured"
-            :style="{ color: '#c22429', fontWeight: '500' }"
-          >
-            <span style="margin-left: 15px"> Your location </span>
+        <nuxt-link to="/location">
+            <a-button  @click="showModal"
+              icon="environment"
+              class="button-coloured"
+              :style="{ color: '#c22429', fontWeight: '500' }"
+            >
+              <span> Your location </span>
           </a-button>
+          </nuxt-link>
         </a-col>
         <a-space />
         <a-col :span="10">
@@ -75,15 +77,27 @@ export default {
   computed: {
     ...mapGetters("cart", ["cartItemCount"]),
   },
+  methods:{
+    showModal() {
+      const $this = this;
+      this.$confirm({
+        title: "Are you sure u need a location?",
+        onOk() {
+          $this.$emit("onClose");
+        },
+        onCancel() {},
+      });
+    },
+  }
 };
 </script>
 
 <style>
-.button-coloured.ant-btn:focus {
+.button-coloured .ant-btn:focus {
   border: none;
   background: rgba(196, 45, 50, 0.1) !important;
   color: #c42d32 !important;
-  width: 117px;
+  width: 150px;
 }
 
 .button-coloured {

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
          <a-row type="flex" justify="space-between" v-if="products.length >= 1">
       <a-col
@@ -345,4 +345,4 @@ export default {
 .meal_actions {
   margin-top: 20px;
 }
-</style>
+</style> -->

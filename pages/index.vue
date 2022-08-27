@@ -25,23 +25,35 @@
       <EveryDayMeal/>
   </div>
   <div v-else-if="showComponent === '2'">
-    <FriedMeal />
+    <!-- <FriedMeal /> -->
+    yo! yo!! yo!!!
   </div>
   <div v-else>
     Not A/B/C
   </div>
+
+  <a-row type="flex" justify="center">
+    <a-col :span="3">
+          <a-button
+            class="button-coloured"
+            :style="{ color: '#c22429', fontWeight: '500' }"
+          >
+            <span> See More </span>
+          </a-button>
+        </a-col>
+  </a-row>
   </div>
 </template>
 
 <script>
 
 import EveryDayMeal from "../components/cards/DailyCard.vue"
-import FriedMeal from "../components/cards/FriedCard.vue"
+// import FriedMeal from "../components/cards/FriedCard.vue"
 
 export default {
   components: {
     EveryDayMeal,
-    FriedMeal
+    // FriedMeal
 },
   data() {
     return {
@@ -89,6 +101,7 @@ export default {
 </script>
 
 <style>
+/* class="title-head" */
 .title-head {
   color: #c22429;
   font-weight: 600;

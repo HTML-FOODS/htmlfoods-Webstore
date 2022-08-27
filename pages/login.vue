@@ -104,7 +104,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("cart", ["toggleLogIn"]),
+    ...mapActions(["toggleLogIn"]),
     login() {
       this.loading = true;
       this.toggleLogIn(true);
@@ -133,14 +133,6 @@ export default {
         console.log({err});
       })
 
-      // setTimeout(() => {
-      //   this.loading = false;
-      //   this.$notification.success({
-      //     message: "Success",
-      //     description: "You're now logged in",
-      //   });
-      //   this.$router.push("/");
-      // }, 1000);
     },
     
   },
@@ -148,12 +140,6 @@ export default {
 </script>
 
 <style scoped>
-/* .login-background {
-  background-image: url("/assets/img/htmlUnderground.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-} */
 .ant-layout {
   background: transparent;
 }
