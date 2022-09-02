@@ -186,27 +186,31 @@ export default {
       days: [
         {
           id: "1",
-          name: "Monday",
+          name: "Everyday Affordable Value Meals",
         },
         {
           id: "2",
-          name: "Tuesday",
+          name: "Soulfully Spiced Fried Chicken",
         },
         {
           id: "3",
-          name: "Wednesday",
+          name: "Delicious Rotisserie Chicken",
         },
         {
           id: "4",
-          name: "Thursday",
+          name: "Flame Grilled Chicken",
         },
         {
           id: "5",
-          name: "Friday",
+          name: "Burgers, Wraps & ChickWhizz",
         },
         {
           id: "6",
-          name: "Saturday",
+          name: "Tasty Sides",
+        },
+        {
+          id: "7",
+          name: "Sweet Treats & Beverages",
         },
       ],
       products: [

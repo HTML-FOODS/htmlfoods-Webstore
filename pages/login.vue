@@ -13,70 +13,44 @@
           <a-row type="flex" justify="center">
             <a-form style="margin-top: 40px; width: 400px">
               <a-row dense class="ma-0">
-                <a-input
-                  size="large"
-                  v-model="email"
-                  placeholder="Enter your email"
-                  type="email"
-                  class="login__Input"
-                  :rules="[(v) => !!v || 'Please enter your email']"
-                >
+                <a-input size="large" v-model="email" placeholder="Enter your email" type="email" class="login__Input"
+                  :rules="[(v) => !!v || 'Please enter your email']">
                 </a-input>
               </a-row>
               <a-row>
-                <a-input-password
-                  size="large"
-                  v-model="password"
-                  placeholder="Your Password"
-                  class="login__Input"
-                  :rules="[(v) => !!v || 'Please enter your password']"
-                >
+                <a-input-password size="large" v-model="password" placeholder="Your Password" class="login__Input"
+                  :rules="[(v) => !!v || 'Please enter your password']">
                 </a-input-password>
               </a-row>
               <a-row type="flex" justify="end" class="admin">
                 <!-- <span style="margin: 0 auto"> -->
-                <a-button
-                  type="link"
-                  style="
+                <a-button type="link" style="
                     color: rgba(0, 0, 0, 0.65);
                     margin-top: 10px;
                     padding-right: 0px;
-                  "
-                >
+                  ">
                   Forgot Password?
                 </a-button>
                 <!-- </span> -->
               </a-row>
               <a-row type="flex" justify="start">
-                <a-button
-                  :disabled="email === '' || password === ''"
-                  :loading="loading"
-                  large
-                  block
-                  class="login-btn"
-                  @click="login()"
-                >
-                  <span
-                    :style="{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      fontSize: '17px',
-                    }"
-                  >
-                    LOG IN</span
-                  >
+                <a-button :disabled="email === '' || password === ''" :loading="loading" large block class="login-btn"
+                  @click="login()">
+                  <span :style="{
+                    color: '#FFFFFF',
+                    fontWeight: 'bold',
+                    fontSize: '17px',
+                  }">
+                    LOG IN</span>
                 </a-button>
               </a-row>
               <a-row type="flex" justify="space-around" class="admin">
                 <span style="font-size: 13px">
                   New User?
-                  <a-button
-                    type="link"
-                    style="color: #c42d32; padding: 5px 0px"
-                  >
+                  <a-button type="link" style="color: #c42d32; padding: 5px 0px">
                     Sign Up
-                  </a-button></span
-                >
+                  </a-button>
+                </span>
               </a-row>
             </a-form>
           </a-row>
@@ -103,19 +77,59 @@ export default {
     };
   },
   methods: {
-    ...mapActions("cart", ["toggleLogIn"]),
-    login() {
+    async login() {
+      const thisLogin = {
+        email: this.email,
+        password: this.password
+      };
       this.loading = true;
-      this.toggleLogIn(true);
-      setTimeout(() => {
-        this.loading = false;
-        this.$notification.success({
-          message: "Success",
-          description: "You're now logged in",
+      await this.$auth
+        .loginWith("local", { data: thisLogin })
+        .then(res => {
+          const { data } = res;
+          this.loading = false;
+          // this.$router.push(`/admin/overview`);
+          if (data.status == "OK") {
+            this.$store.commit("setUser", data.payload);
+            this.$notification.success({
+              message: "Success",
+              description: data.message
+            });
+            // this.$router.history;
+            // ? this.$router.replace(
+            //     this.$router.history.current.query.redirect
+            //   )
+            // :
+            this.$router.push(`/`);
+
+            // this.$router.replace(this.$router.history.current.query.redirect);
+          } else if (data.status == "ERROR") {
+            this.authFailed = true;
+            this.$notification.error({
+              message: "Error",
+              description: data.message
+            });
+            return;
+          } else {
+            console.log('data', data);
+            this.authFailed = true;
+            this.$notification.error({
+              message: "Error",
+              description: data.message
+            });
+            return;
+          }
+        })
+        .catch(err => {
+          this.loading = false;
+          const { response } = err;
+          console.log('err', err);
+          this.$notification.error({
+            message: "Error",
+            description: response.data.message || "Network Error"
+          });
         });
-        this.$router.push("/");
-      }, 1000);
-    },
+    }
   },
 };
 </script>
@@ -130,20 +144,24 @@ export default {
 .ant-layout {
   background: transparent;
 }
+
 .container {
   /* margin: 20px auto 0 !important;
   position: relative; */
   display: flex;
   justify-content: center;
 }
+
 .login-side {
   margin-top: 4rem;
 }
+
 .login-text {
   font-weight: 600;
   font-size: 30px;
   color: #000000;
 }
+
 .forgot-password {
   width: 153px;
   height: 26px;
@@ -152,6 +170,7 @@ export default {
   color: #948c8c;
   /* margin: 116px; */
 }
+
 .register-btn {
   border: 3px solid rgba(255, 0, 0, 0.67);
   box-sizing: border-box;
@@ -160,6 +179,7 @@ export default {
   width: 96px;
   height: 30px;
 }
+
 .login-btn {
   background: #c42d32;
   border: 1px solid #dcd8d8;
@@ -170,10 +190,12 @@ export default {
   height: 40px;
   margin: 16px 0 33px;
 }
+
 .ant-btn:hover {
   text-decoration: none;
   background: rgba(194, 36, 41, 0.63137) !important;
 }
+
 .login__Input.ant-input {
   background: #ffffff !important;
   border: 1px solid #dcd8d8 !important;
@@ -194,6 +216,7 @@ export default {
   max-width: 385px;
   /* height: 60px !important; */
 }
+
 /* input[type="password"] {
   height: 60px !important;
 }
@@ -203,6 +226,7 @@ input[type="email"] {
 input:-internal-autofill-selected {
   background: #ffffff !important;
 }
+
 /* .ant-input {
   height: 60px;
 } */
@@ -211,18 +235,21 @@ input:-internal-autofill-selected {
   max-width: 385px;
   /* padding-bottom: 30px; */
 }
+
 /* .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
   width: 100% !important;
 } */
 .ant-btn[disabled] {
   opacity: 0.3;
 }
+
 /* .ant-select-selection__rendered {
   line-height: 60px;
 } */
 .admin {
   max-width: 385px;
 }
+
 @media screen and (max-width: 767px) {
   div#components-layout-demo-basic {
     background-image: none !important;

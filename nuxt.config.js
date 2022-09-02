@@ -33,7 +33,7 @@ export default {
   axios: {
     baseURL:
       process.env.NODE_ENV === "production"
-        ? process.env.BASE_URL
+        ? process.env.BASE_URL || 'https://htmlfood.herokuapp.com'
         : `https://htmlfood.herokuapp.com`
   },
 
@@ -42,10 +42,10 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: "/api/v1/admin/login",
+            url: "/api/v1/user/login",
             method: "post"
           },
-          logout: { url: "/api/v1/admin/logout", method: "put" },
+          logout: { url: "api/v1/user/logout", method: "put" },
           user: false
         }
         // tokenType: ""
@@ -56,9 +56,9 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
 
-  // router: {
-  //   middleware: ["auth"]
-  // },
+  router: {
+    middleware: ["auth"]
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -68,8 +68,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
