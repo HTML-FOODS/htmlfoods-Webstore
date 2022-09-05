@@ -1,22 +1,18 @@
 <template>
   <a-layout id="components-layout-demo-fixed-sider">
     <app-header />
+    <Address />
     <a-layout>
-      <app-sidebar />
-      <a-layout
-        :style="{
-          marginLeft: '230px',
-          height: 'calc(100vh - 96px)',
-          background: 'rgba(242, 242, 242, 0.8)',
-        }"
-      >
+      <!-- <app-sidebar /> -->
+      <a-layout :style="{
+        minHeight: 'calc(100vh - 96px)',
+        background: 'rgba(242, 242, 242, 0.8)',
+      }">
         <a-layout-content :style="{ overflow: 'initial', height: '100%' }">
-          <div
-            :style="{
-              padding: '24px',
-              textAlign: 'center',
-            }"
-          >
+          <div :style="{
+            padding: '24px',
+            textAlign: 'center',
+          }">
             <Nuxt />
           </div>
         </a-layout-content>
@@ -29,8 +25,9 @@
 import AppBreadcrumb from "../components/Layout/AppBreadcrumb.vue";
 import AppHeader from "../components/Layout/AppHeader.vue";
 import AppSidebar from "../components/Layout/AppSidebar.vue";
+import Address from "../components/location/address.vue";
 export default {
-  components: { AppSidebar, AppHeader, AppBreadcrumb },
+  components: { AppSidebar, AppHeader, AppBreadcrumb, Address },
   data() {
     return {
       collapsed: false,
@@ -73,15 +70,18 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
+
 .ant-input-affix-wrapper .ant-input-prefix {
   color: #c22429 !important;
 }
+
 .ant-input {
   /* background: rgba(196, 45, 50, 0.1); */
   border-radius: 5px !important;
   /* border: none !important; */
   height: 38px;
 }
+
 .ant-layout-header {
   height: 96px !important;
 }
@@ -90,8 +90,19 @@ export default {
   background: rgba(196, 45, 50, 0.1);
   border-radius: 5px;
   height: 38px;
-  padding: 0 30px;
+  padding: 0 20px;
   margin: 0 auto;
+}
+
+.menu-coloured {
+  background: rgba(196, 45, 50, 0.1);
+  border-radius: 5px;
+  height: 38px;
+  width: auto;
+  overflow-wrap: break-word;
+  padding: 7px 10px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
 .ant-tag {

@@ -1,12 +1,5 @@
 <template>
-    <div>
-        <div class="container">
-            <GmapMap :center="center" :zoom="8" id="map" map-type-id="ROADMAP" style="height: 70vh">
-                <GmapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true"
-                    :draggable="true" @click="center = m.position" />
-            </GmapMap>
-        </div>
-    </div>
+    <div></div>
 </template>
 
 <script>
@@ -24,23 +17,9 @@ export default {
         setTimeout(() => this.getLocation(), 1000);
     },
     methods: {
-        showUserLocationOnTheMap(lat, lng) {
+        setLngAndLat(lat, lng) {
             this.$store.commit("location/setLocation", { lat, lng });
-            this.latitude = lat;
-            this.longitude = lng;
             console.log('setloc:::::::', { lat: lat, lng: lng });
-            var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: new google.maps.LatLng(lat, lng),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-            console.log("Hi");
-            //Add Marker
-            new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map
-            });
-
         },
 
         getAddressFrom(lat, lng) {
@@ -76,7 +55,7 @@ export default {
                             //     position.coords.latitude,
                             //     position.coords.longitude
                             // );
-                            this.showUserLocationOnTheMap(
+                            this.setLngAndLat(
                                 position.coords.latitude,
                                 position.coords.longitude
                             );

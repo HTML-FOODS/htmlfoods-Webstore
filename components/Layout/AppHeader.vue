@@ -97,7 +97,7 @@ export default {
   height: 15px;
   width: 15px;
   font-size: 10px;
-  display: flex;
+  margin-left: 0 !important;
   flex-direction: column;
   justify-content: center;
   align-items: center;

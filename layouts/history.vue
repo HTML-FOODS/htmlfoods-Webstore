@@ -83,13 +83,15 @@ export default {
   height: 96px !important;
 }
 
-.button-coloured {
+/* .button-coloured {
   background: rgba(196, 45, 50, 0.1);
   border-radius: 5px;
   height: 38px;
-  padding: 0 30px;
+  padding: 10px;
+  width: 160px;
+  white-space: pre-line;
   margin: 0 auto;
-}
+} */
 
 .ant-tag {
   display: flex;

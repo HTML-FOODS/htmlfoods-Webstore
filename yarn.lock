@@ -8073,6 +8073,11 @@ vue2-google-maps@^0.10.7:
     babel-runtime "^6.26.0"
     marker-clusterer-plus "^2.1.4"
 
+vue2-smooth-scroll@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/vue2-smooth-scroll/-/vue2-smooth-scroll-1.6.0.tgz#293a46171d2a7ddd3719e0339db753392105b7c9"
+  integrity sha512-4MvpWJf8jsJUEy9m1OnlzNJj/a3Tj1C3wgRKXpCIGiGFEVrmRppgVAijq01/WKnGA3MAGD9Ynupe64fxxwZ//g==
+
 vue@^2.6.12, vue@^2.6.14:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
